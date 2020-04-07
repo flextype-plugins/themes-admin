@@ -39,3 +39,9 @@ $flextype['ThemesController'] = static function ($container) {
 $flextype['TemplatesController'] = static function ($container) {
     return new TemplatesController($container);
 };
+
+$_flextype_menu = ($flextype['registry']->has('plugins.admin.settings.flextype_menu')) ? $flextype['registry']->get('plugins.admin.settings.flextype_menu') : [];
+
+$flextype['registry']->set('plugins.admin.settings.flextype_menu',
+                       array_merge($_flextype_menu,
+                        [0 => ['link' => ['url' => '../../', 'title' => 'View site', 'is_external' => true, 'icon' => 'fas fa-globe']]]));
