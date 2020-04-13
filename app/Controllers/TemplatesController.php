@@ -134,7 +134,7 @@ class TemplatesController extends Container
             return $response->withRedirect($this->router->pathFor('admin.templates.edit') . '?theme=' . $theme . '&type=' . $type . '&id=' . $id);
         }
 
-        return $response->withRedirect($this->router->pathFor('admin.templates.index'));
+        return $response->withRedirect($this->router->pathFor('admin.templates.index') . '?theme=' . $theme);
     }
 
     /**
@@ -261,7 +261,7 @@ class TemplatesController extends Container
         $theme = $request->getParsedBody()['theme'];
         $type  = $request->getParsedBody()['type_current'];
 
-        if (! Filesystem::has(PATH['site'] . '/themes/' . $this->registry->get('flextype.theme') . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html')) {
+        if (! Filesystem::has(PATH['site'] . '/themes/' . $this->registry->get('plugins.site.settings.theme') . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html')) {
             if (Filesystem::rename(
                 PATH['site'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id_current'] . '.html',
                 PATH['site'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html'
