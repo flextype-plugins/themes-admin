@@ -69,14 +69,14 @@ class Themes
             foreach ($themes_list as $theme) {
 
                 // Set custom theme directory
-                $custom_theme_settings_dir = PATH['config']['site'] . '/themes/' . $theme['dirname'];
+                $custom_theme_settings_dir = PATH['site'] . '/config/themes/' . $theme['dirname'];
 
                 // Set default theme settings and manifest files
                 $default_theme_settings_file = PATH['site'] . '/themes/' . $theme['dirname'] . '/settings.yaml';
                 $default_theme_manifest_file = PATH['site'] . '/themes/' . $theme['dirname'] . '/theme.yaml';
 
                 // Set custom theme settings and manifest files
-                $custom_theme_settings_file = PATH['config']['site'] . '/themes/' . $theme['dirname'] . '/settings.yaml';
+                $custom_theme_settings_file = PATH['site'] . '/config/themes/' . $theme['dirname'] . '/settings.yaml';
 
                 // Create custom theme settings directory
                 ! Filesystem::has($custom_theme_settings_dir)  and Filesystem::createDir($custom_theme_settings_dir);
@@ -148,7 +148,7 @@ class Themes
             foreach ($themes_list as $theme) {
                 $default_theme_settings_file = PATH['site'] . '/themes/' . $theme['dirname'] . '/settings.yaml';
                 $default_theme_manifest_file = PATH['site'] . '/themes/' . $theme['dirname'] . '/theme.yaml';
-                $site_theme_settings_file    = PATH['config']['site'] . '/themes/' . $theme['dirname'] . '/settings.yaml';
+                $site_theme_settings_file    = PATH['site'] . '/config/themes/' . $theme['dirname'] . '/settings.yaml';
 
                 $f1 = Filesystem::has($default_theme_settings_file) ? filemtime($default_theme_settings_file) : '';
                 $f2 = Filesystem::has($default_theme_manifest_file) ? filemtime($default_theme_manifest_file) : '';
