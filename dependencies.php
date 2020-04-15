@@ -16,7 +16,7 @@ use Flextype\Component\I18n\I18n;
 use function Flextype\Component\I18n\__;
 
 // Add Admin Navigation
-$flextype->registry->set('plugins.admin.settings.navigation.extends.themes', ['title' => __('admin_themes'),'icon' => 'fas fa-palette', 'link' => $flextype->router->pathFor('admin.themes.index')]);
+$flextype->registry->set('plugins.admin.settings.navigation.extends.themes', ['title' => __('themes_admin_themes'),'icon' => 'fas fa-palette', 'link' => $flextype->router->pathFor('admin.themes.index')]);
 
 /**
  * Add themes service to Flextype container
@@ -44,4 +44,4 @@ $_flextype_menu = ($flextype['registry']->has('plugins.admin.settings.flextype_m
 
 $flextype['registry']->set('plugins.admin.settings.flextype_menu',
                        array_merge($_flextype_menu,
-                        [0 => ['link' => ['url' => '../../', 'title' => 'View site', 'is_external' => true, 'icon' => 'fas fa-globe']]]));
+                        [0 => ['link' => ['url' => '../../', 'title' => __('themes_admin_view_site'), 'is_external' => true, 'icon' => 'fas fa-globe']]]));
