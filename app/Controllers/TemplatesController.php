@@ -42,12 +42,12 @@ class TemplatesController extends Container
                 'links' =>  [
                     'themes' => [
                         'link' => $this->router->pathFor('admin.themes.index'),
-                        'title' => __('admin_themes'),
+                        'title' => __('themes_admin_themes'),
 
                     ],
                     'templates' => [
                         'link' => $this->router->pathFor('admin.templates.index') . '?theme=' . $theme,
-                        'title' => __('admin_templates'),
+                        'title' => __('themes_admin_templates'),
                         'active' => true
                     ],
                 ],
@@ -82,12 +82,12 @@ class TemplatesController extends Container
                 'links' =>  [
                     'themes' => [
                         'link' => $this->router->pathFor('admin.themes.index'),
-                        'title' => __('admin_themes'),
+                        'title' => __('themes_admin_themes'),
 
                     ],
                     'templates' => [
                         'link' => $this->router->pathFor('admin.templates.index') . '?theme=' . $theme,
-                        'title' => __('admin_templates'),
+                        'title' => __('themes_admin_templates'),
 
                     ],
                     'templates_add' => [
@@ -161,12 +161,12 @@ class TemplatesController extends Container
                 'links' => [
                     'themes' => [
                         'link' => $this->router->pathFor('admin.themes.index'),
-                        'title' => __('admin_themes'),
+                        'title' => __('themes_admin_themes'),
 
                     ],
                     'templates' => [
                         'link' => $this->router->pathFor('admin.templates.index') . '?theme=' . $theme,
-                        'title' => __('admin_templates'),
+                        'title' => __('themes_admin_templates'),
 
                     ],
                     'templates_editor' => [
@@ -231,12 +231,12 @@ class TemplatesController extends Container
                 'links' => [
                     'themes' => [
                         'link' => $this->router->pathFor('admin.themes.index'),
-                        'title' => __('admin_themes'),
+                        'title' => __('themes_admin_themes'),
 
                     ],
                     'templates' => [
                         'link' => $this->router->pathFor('admin.templates.index') . '?theme=' . $theme,
-                        'title' => __('admin_templates'),
+                        'title' => __('themes_admin_templates'),
 
                     ],
                     'templates_rename' => [

@@ -40,14 +40,14 @@ class ThemesController extends Container
                 'links' =>  [
                     'themes' => [
                         'link' => $this->router->pathFor('admin.themes.index'),
-                        'title' => __('admin_themes'),
+                        'title' => __('themes_admin_themes'),
                         'active' => true
                     ],
                 ],
                 'buttons' => [
                     'themes_get_more' => [
                         'link' => 'https://github.com/flextype/themes',
-                        'title' => __('admin_get_more_themes'),
+                        'title' => __('themes_admin_get_more_themes'),
                         'target' => '_blank',
                     ],
                 ],
@@ -107,7 +107,7 @@ class ThemesController extends Container
                 'links' =>  [
                     'themes' => [
                         'link' => $this->router->pathFor('admin.themes.index'),
-                        'title' => __('admin_themes'),
+                        'title' => __('themes_admin_themes'),
                     ],
                     'themes_information' => [
                         'link' => $this->router->pathFor('admin.themes.information') . '?id=' . $request->getQueryParams()['id'],
@@ -146,7 +146,7 @@ class ThemesController extends Container
                 'links' =>  [
                     'themes' => [
                         'link' => $this->router->pathFor('admin.themes.index'),
-                        'title' => __('admin_themes'),
+                        'title' => __('themes_admin_themes'),
                     ],
                     'themes_settings' => [
                         'link' => $this->router->pathFor('admin.themes.settings') . '?id=' . $request->getQueryParams()['id'],
@@ -181,9 +181,9 @@ class ThemesController extends Container
         $custom_theme_settings_file = PATH['site'] . '/config/themes/' . $id . '/settings.yaml';
 
         if (Filesystem::write($custom_theme_settings_file, $data)) {
-            $this->flash->addMessage('success', __('admin_message_theme_settings_saved'));
+            $this->flash->addMessage('success', __('themes_admin_message_theme_settings_saved'));
         } else {
-            $this->flash->addMessage('error', __('admin_message_theme_settings_not_saved'));
+            $this->flash->addMessage('error', __('themes_admin_message_theme_settings_not_saved'));
         }
 
         return $response->withRedirect($this->router->pathFor('admin.themes.settings') . '?id=' . $id);
