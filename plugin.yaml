@@ -11,7 +11,7 @@ bugs: https://github.com/flextype-plugins/themes-admin/issues
 license: MIT
 
 dependencies:
-  flextype: 0.9.7
+  flextype: 0.9.8
   plugins:
     twig: 1.0.0
     admin: 1.0.0
