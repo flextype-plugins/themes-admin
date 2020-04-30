@@ -69,14 +69,14 @@ class Themes
             foreach ($themes_list as $theme) {
 
                 // Set custom theme directory
-                $custom_theme_settings_dir = PATH['site'] . '/config/themes/' . $theme['dirname'];
+                $custom_theme_settings_dir = PATH['project'] . '/config/themes/' . $theme['dirname'];
 
                 // Set default theme settings and manifest files
-                $default_theme_settings_file = PATH['site'] . '/themes/' . $theme['dirname'] . '/settings.yaml';
-                $default_theme_manifest_file = PATH['site'] . '/themes/' . $theme['dirname'] . '/theme.yaml';
+                $default_theme_settings_file = PATH['project'] . '/themes/' . $theme['dirname'] . '/settings.yaml';
+                $default_theme_manifest_file = PATH['project'] . '/themes/' . $theme['dirname'] . '/theme.yaml';
 
                 // Set custom theme settings and manifest files
-                $custom_theme_settings_file = PATH['site'] . '/config/themes/' . $theme['dirname'] . '/settings.yaml';
+                $custom_theme_settings_file = PATH['project'] . '/config/themes/' . $theme['dirname'] . '/settings.yaml';
 
                 // Create custom theme settings directory
                 ! Filesystem::has($custom_theme_settings_dir)  and Filesystem::createDir($custom_theme_settings_dir);
@@ -91,7 +91,7 @@ class Themes
                 if (trim($default_theme_settings_file_content) === '') {
                     $default_theme_settings = [];
                 } else {
-                    $default_theme_settings = $this->flextype['parser']->decode($default_theme_settings_file_content, 'yaml');
+                    $default_theme_settings = $this->flextype['serializer']->decode($default_theme_settings_file_content, 'yaml');
                 }
 
                 // Create custom theme settings file
@@ -102,7 +102,7 @@ class Themes
                 if (trim($custom_theme_settings_file_content) === '') {
                     $custom_theme_settings = [];
                 } else {
-                    $custom_theme_settings = $this->flextype['parser']->decode($custom_theme_settings_file_content, 'yaml');
+                    $custom_theme_settings = $this->flextype['serializer']->decode($custom_theme_settings_file_content, 'yaml');
                 }
 
                 // Check if default theme manifest file exists
@@ -112,7 +112,7 @@ class Themes
 
                 // Get default theme manifest content
                 $default_theme_manifest_file_content = Filesystem::read($default_theme_manifest_file);
-                $default_theme_manifest              = $this->flextype['parser']->decode($default_theme_manifest_file_content, 'yaml');
+                $default_theme_manifest              = $this->flextype['serializer']->decode($default_theme_manifest_file_content, 'yaml');
 
                 // Merge theme settings and manifest data
                 $themes[$theme['dirname']]['manifest'] = $default_theme_manifest;
@@ -146,9 +146,9 @@ class Themes
         // Go through...
         if (is_array($themes_list) && count($themes_list) > 0) {
             foreach ($themes_list as $theme) {
-                $default_theme_settings_file = PATH['site'] . '/themes/' . $theme['dirname'] . '/settings.yaml';
-                $default_theme_manifest_file = PATH['site'] . '/themes/' . $theme['dirname'] . '/theme.yaml';
-                $site_theme_settings_file    = PATH['site'] . '/config/themes/' . $theme['dirname'] . '/settings.yaml';
+                $default_theme_settings_file = PATH['project'] . '/themes/' . $theme['dirname'] . '/settings.yaml';
+                $default_theme_manifest_file = PATH['project'] . '/themes/' . $theme['dirname'] . '/theme.yaml';
+                $site_theme_settings_file    = PATH['project'] . '/config/themes/' . $theme['dirname'] . '/settings.yaml';
 
                 $f1 = Filesystem::has($default_theme_settings_file) ? filemtime($default_theme_settings_file) : '';
                 $f2 = Filesystem::has($default_theme_manifest_file) ? filemtime($default_theme_manifest_file) : '';
@@ -159,7 +159,7 @@ class Themes
         }
 
         // Create Unique Cache ID for Themes
-        $themes_cache_id = md5('themes' . PATH['site'] . '/themes/' . $_themes_cache_id);
+        $themes_cache_id = md5('themes' . PATH['project'] . '/themes/' . $_themes_cache_id);
 
         // Return themes cache id
         return $themes_cache_id;
@@ -178,7 +178,7 @@ class Themes
         $themes_list = [];
 
         // Get themes list
-        $_themes_list = Filesystem::listContents(PATH['site'] . '/themes');
+        $_themes_list = Filesystem::listContents(PATH['project'] . '/themes');
 
         // Go through founded themes
         foreach ($_themes_list as $theme) {
@@ -207,7 +207,7 @@ class Themes
         $partials_list = [];
 
         // Get partials files
-        $_partials_list = Filesystem::listContents(PATH['site'] . '/themes/' . $theme . '/templates/partials/');
+        $_partials_list = Filesystem::listContents(PATH['project'] . '/themes/' . $theme . '/templates/partials/');
 
         // If there is any partials file then go...
         if (count($_partials_list) > 0) {
@@ -239,7 +239,7 @@ class Themes
         $templates_list = [];
 
         // Get templates files
-        $_templates_list = Filesystem::listContents(PATH['site'] . '/themes/' . $theme . '/templates/');
+        $_templates_list = Filesystem::listContents(PATH['project'] . '/themes/' . $theme . '/templates/');
 
         // If there is any template file then go...
         if (count($_templates_list) > 0) {

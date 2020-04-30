@@ -115,7 +115,7 @@ class TemplatesController extends Container
         $type  = $post_data['type'];
         $theme = $post_data['theme'];
 
-        $file = PATH['site'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $this->slugify->slugify($id) . '.html';
+        $file = PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $this->slugify->slugify($id) . '.html';
 
         if (! Filesystem::has($file)) {
             if (Filesystem::write(
@@ -156,7 +156,7 @@ class TemplatesController extends Container
                 'menu_item' => 'themes',
                 'theme' => $theme,
                 'id' => $request->getQueryParams()['id'],
-                'data' => Filesystem::read(PATH['site'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getQueryParams()['id'] . '.html'),
+                'data' => Filesystem::read(PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getQueryParams()['id'] . '.html'),
                 'type' => ($request->getQueryParams()['type'] && $request->getQueryParams()['type'] === 'partial' ? 'partial' : 'template'),
                 'links' => [
                     'themes' => [
@@ -199,7 +199,7 @@ class TemplatesController extends Container
         $id    = $request->getParsedBody()['id'];
         $type  = $request->getParsedBody()['type'];
 
-        if (Filesystem::write(PATH['site'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html', $request->getParsedBody()['data'])) {
+        if (Filesystem::write(PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html', $request->getParsedBody()['data'])) {
             $this->flash->addMessage('success', __('admin_message_' . $type . '_saved'));
         } else {
             $this->flash->addMessage('error', __('admin_message_' . $type . '_was_not_saved'));
@@ -261,10 +261,10 @@ class TemplatesController extends Container
         $theme = $request->getParsedBody()['theme'];
         $type  = $request->getParsedBody()['type_current'];
 
-        if (! Filesystem::has(PATH['site'] . '/themes/' . $this->registry->get('plugins.site.settings.theme') . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html')) {
+        if (! Filesystem::has(PATH['project'] . '/themes/' . $this->registry->get('plugins.site.settings.theme') . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html')) {
             if (Filesystem::rename(
-                PATH['site'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id_current'] . '.html',
-                PATH['site'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html'
+                PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id_current'] . '.html',
+                PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html'
             )
             ) {
                 $this->flash->addMessage('success', __('admin_message_' . $type . '_renamed'));
@@ -290,7 +290,7 @@ class TemplatesController extends Container
         $theme = $request->getParsedBody()['theme'];
         $type  = $request->getParsedBody()['type'];
 
-        $file_path = PATH['site'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()[$type . '-id'] . '.html';
+        $file_path = PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()[$type . '-id'] . '.html';
 
         if (Filesystem::delete($file_path)) {
             $this->flash->addMessage('success', __('admin_message_' . $type . '_deleted'));
@@ -313,8 +313,8 @@ class TemplatesController extends Container
         $theme = $request->getParsedBody()['theme'];
         $type  = $request->getParsedBody()['type'];
 
-        $file_path     = PATH['site'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()[$type . '-id'] . '.html';
-        $file_path_new = PATH['site'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()[$type . '-id'] . '-duplicate-' . date('Ymd_His') . '.html';
+        $file_path     = PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()[$type . '-id'] . '.html';
+        $file_path_new = PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()[$type . '-id'] . '-duplicate-' . date('Ymd_His') . '.html';
 
         if (Filesystem::copy($file_path, $file_path_new)) {
             $this->flash->addMessage('success', __('admin_message_' . $type . '_duplicated'));

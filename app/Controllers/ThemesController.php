@@ -66,12 +66,12 @@ class ThemesController extends Container
         // Get data from the request
         $post_data = $request->getParsedBody();
 
-        $custom_settings_file = PATH['site'] . '/config/plugins/site/settings.yaml';
-        $custom_settings_file_data = $this->parser->decode(Filesystem::read($custom_settings_file), 'yaml');
+        $custom_settings_file = PATH['project'] . '/config/plugins/site/settings.yaml';
+        $custom_settings_file_data = $this->serializer->decode(Filesystem::read($custom_settings_file), 'yaml');
 
         Arr::set($custom_settings_file_data, 'theme', $post_data['theme-id']);
 
-        Filesystem::write($custom_settings_file, $this->parser->encode($custom_settings_file_data, 'yaml'));
+        Filesystem::write($custom_settings_file, $this->serializer->encode($custom_settings_file_data, 'yaml'));
 
         // clear cache
         $this->cache->clear('doctrine');
@@ -92,7 +92,7 @@ class ThemesController extends Container
         $id = $request->getQueryParams()['id'];
 
         // Set theme custom manifest content
-        $custom_theme_manifest_file = PATH['site'] . '/themes/' . $id . '/theme.yaml';
+        $custom_theme_manifest_file = PATH['project'] . '/themes/' . $id . '/theme.yaml';
 
         // Get theme custom manifest content
         $custom_theme_manifest_file_content = Filesystem::read($custom_theme_manifest_file);
@@ -103,7 +103,7 @@ class ThemesController extends Container
             [
                 'menu_item' => 'themes',
                 'id' => $id,
-                'theme_manifest' => $this->parser->decode($custom_theme_manifest_file_content, 'yaml'),
+                'theme_manifest' => $this->serializer->decode($custom_theme_manifest_file_content, 'yaml'),
                 'links' =>  [
                     'themes' => [
                         'link' => $this->router->pathFor('admin.themes.index'),
@@ -131,7 +131,7 @@ class ThemesController extends Container
         $id = $request->getQueryParams()['id'];
 
         // Set theme config
-        $custom_theme_settings_file = PATH['site'] . '/config/themes/' . $id . '/settings.yaml';
+        $custom_theme_settings_file = PATH['project'] . '/config/themes/' . $id . '/settings.yaml';
 
         // Get theme settings content
         $custom_theme_settings_file_content = Filesystem::read($custom_theme_settings_file);
@@ -178,7 +178,7 @@ class ThemesController extends Container
         $id   = $post_data['id'];
         $data = $post_data['data'];
 
-        $custom_theme_settings_file = PATH['site'] . '/config/themes/' . $id . '/settings.yaml';
+        $custom_theme_settings_file = PATH['project'] . '/config/themes/' . $id . '/settings.yaml';
 
         if (Filesystem::write($custom_theme_settings_file, $data)) {
             $this->flash->addMessage('success', __('themes_admin_message_theme_settings_saved'));
