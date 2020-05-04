@@ -12,8 +12,7 @@ license: MIT
 
 dependencies:
   flextype: 0.9.8
-  plugins:
-    twig: 1.0.0
-    admin: 1.0.0
-    form: 1.0.0
-    site: 1.0.0
+  twig: '>=1.0.0'
+  admin: '>=1.0.0'
+  form: '>=1.0.0'
+  site: '>=1.0.0'
