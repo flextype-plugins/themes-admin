@@ -54,7 +54,7 @@ class TemplatesController extends Container
                 'buttons' => [
                     'templates_create' => [
                         'link' => $this->router->pathFor('admin.templates.add') . '?theme=' . $theme,
-                        'title' => __('admin_create_new_template'),
+                        'title' => __('themes_admin_create_new_template'),
 
                     ],
                 ],
@@ -200,9 +200,9 @@ class TemplatesController extends Container
         $type  = $request->getParsedBody()['type'];
 
         if (Filesystem::write(PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html', $request->getParsedBody()['data'])) {
-            $this->flash->addMessage('success', __('admin_message_' . $type . '_saved'));
+            $this->flash->addMessage('success', __('themes_admin_message_' . $type . '_saved'));
         } else {
-            $this->flash->addMessage('error', __('admin_message_' . $type . '_was_not_saved'));
+            $this->flash->addMessage('error', __('themes_admin_message_' . $type . '_was_not_saved'));
         }
 
         return $response->withRedirect($this->router->pathFor('admin.templates.edit') . '?id=' . $id . '&type=' . $type . '&theme=' . $theme);
@@ -267,12 +267,12 @@ class TemplatesController extends Container
                 PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html'
             )
             ) {
-                $this->flash->addMessage('success', __('admin_message_' . $type . '_renamed'));
+                $this->flash->addMessage('success', __('themes_admin_message_' . $type . '_renamed'));
             } else {
-                $this->flash->addMessage('error', __('admin_message_' . $type . '_was_not_renamed'));
+                $this->flash->addMessage('error', __('themes_admin_message_' . $type . '_was_not_renamed'));
             }
         } else {
-            $this->flash->addMessage('error', __('admin_message_' . $type . '_was_not_renamed'));
+            $this->flash->addMessage('error', __('themes_admin_message_' . $type . '_was_not_renamed'));
         }
 
         return $response->withRedirect($this->router->pathFor('admin.templates.index') . '?theme=' . $theme);
@@ -293,9 +293,9 @@ class TemplatesController extends Container
         $file_path = PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()[$type . '-id'] . '.html';
 
         if (Filesystem::delete($file_path)) {
-            $this->flash->addMessage('success', __('admin_message_' . $type . '_deleted'));
+            $this->flash->addMessage('success', __('themes_admin_message_' . $type . '_deleted'));
         } else {
-            $this->flash->addMessage('error', __('admin_message_' . $type . '_was_not_deleted'));
+            $this->flash->addMessage('error', __('themes_admin_message_' . $type . '_was_not_deleted'));
         }
 
         return $response->withRedirect($this->router->pathFor('admin.templates.index') . '?theme=' . $theme);
@@ -317,9 +317,9 @@ class TemplatesController extends Container
         $file_path_new = PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()[$type . '-id'] . '-duplicate-' . date('Ymd_His') . '.html';
 
         if (Filesystem::copy($file_path, $file_path_new)) {
-            $this->flash->addMessage('success', __('admin_message_' . $type . '_duplicated'));
+            $this->flash->addMessage('success', __('themes_admin_message_' . $type . '_duplicated'));
         } else {
-            $this->flash->addMessage('error', __('admin_message_' . $type . '_was_not_duplicated'));
+            $this->flash->addMessage('error', __('themes_admin_message_' . $type . '_was_not_duplicated'));
         }
 
         return $response->withRedirect($this->router->pathFor('admin.templates.index') . '?theme=' . $theme);
