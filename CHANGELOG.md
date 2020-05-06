@@ -1,3 +1,10 @@
+<a name="1.0.2"></a>
+# [1.0.2](https://github.com/flextype-plugins/themes-admin/compare/v1.0.1...v1.0.2) (2020-05-06)
+
+### Translates
+
+* Update Translates for all locales
+
 <a name="1.0.1"></a>
 # [1.0.1](https://github.com/flextype-plugins/themes-admin/compare/v1.0.0...v1.0.1) (2020-05-06)
 

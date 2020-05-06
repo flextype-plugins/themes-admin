@@ -92,7 +92,7 @@ class TemplatesController extends Container
                     ],
                     'templates_add' => [
                         'link' => $this->router->pathFor('admin.templates.add') . '?theme=' . $theme,
-                        'title' => __('admin_create_new_template'),
+                        'title' => __('themes_admin_create_new_template'),
                         'active' => true
                     ],
                 ],
@@ -122,12 +122,12 @@ class TemplatesController extends Container
                 $file,
                 ''
             )) {
-                $this->flash->addMessage('success', __('admin_message_' . $type . '_created'));
+                $this->flash->addMessage('success', __('themes_admin_message_' . $type . '_created'));
             } else {
-                $this->flash->addMessage('error', __('admin_message_' . $type . '_was_not_created'));
+                $this->flash->addMessage('error', __('themes_admin_message_' . $type . '_was_not_created'));
             }
         } else {
-            $this->flash->addMessage('error', __('admin_message_' . $type . '_was_not_created'));
+            $this->flash->addMessage('error', __('themes_admin_message_' . $type . '_was_not_created'));
         }
 
         if (isset($post_data['create-and-edit'])) {
