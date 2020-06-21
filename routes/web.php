@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Flextype;
 
-$app->group('/' . $admin_route, function () use ($app) : void {
+$app->group('/' . $admin_route, function () use ($app, $flextype) : void {
 
     // ThemesController
     $app->get('/themes', 'ThemesController:index')->setName('admin.themes.index');
@@ -24,4 +24,8 @@ $app->group('/' . $admin_route, function () use ($app) : void {
     $app->post('/templates/duplicate', 'TemplatesController:duplicateProcess')->setName('admin.templates.duplicateProcess');
     $app->post('/templates/delete', 'TemplatesController:deleteProcess')->setName('admin.templates.deleteProcess');
 
-})->add(new AdminPanelAuthMiddleware($flextype));
+})->add(new AclAccountIsUserLoggedInMiddleware(['container' => $flextype, 'redirect' => 'admin.accounts.login']))
+  ->add(new AclAccountsIsUserLoggedInRolesOneOfMiddleware(['container' => $flextype,
+                                                           'redirect' => ($flextype->acl->isUserLoggedIn() ? 'admin.accounts.no-access' : 'admin.accounts.login'),
+                                                           'roles' => 'admin']))
+  ->add('csrf');
