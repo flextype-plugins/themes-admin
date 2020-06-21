@@ -1,3 +1,10 @@
+<a name="1.0.5"></a>
+# [1.0.5](https://github.com/flextype-plugins/form-admin/compare/v1.0.4...v1.0.5) (2020-06-21)
+
+### Features
+
+* **core** updates for new ACL and Accounts Admin Plugins.
+
 <a name="1.0.4"></a>
 # [1.0.4](https://github.com/flextype-plugins/themes-admin/compare/v1.0.3...v1.0.4) (2020-05-07)
 
