@@ -24,8 +24,8 @@ $app->group('/' . $admin_route, function () use ($app, $flextype) : void {
     $app->post('/templates/duplicate', 'TemplatesController:duplicateProcess')->setName('admin.templates.duplicateProcess');
     $app->post('/templates/delete', 'TemplatesController:deleteProcess')->setName('admin.templates.deleteProcess');
 
-})->add(new AclAccountIsUserLoggedInMiddleware(['container' => $flextype, 'redirect' => 'admin.accounts.login']))
-  ->add(new AclAccountsIsUserLoggedInRolesOneOfMiddleware(['container' => $flextype,
-                                                           'redirect' => ($flextype->acl->isUserLoggedIn() ? 'admin.accounts.no-access' : 'admin.accounts.login'),
-                                                           'roles' => 'admin']))
+})->add(new AclIsUserLoggedInMiddleware(['container' => $flextype, 'redirect' => 'admin.accounts.login']))
+  ->add(new AclIsUserLoggedInRolesInMiddleware(['container' => $flextype,
+                                                'redirect' => ($flextype->acl->isUserLoggedIn() ? 'admin.accounts.no-access' : 'admin.accounts.login'),
+                                                'roles' => 'admin']))
   ->add('csrf');
