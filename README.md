@@ -17,6 +17,7 @@ The following dependencies need to be installed for Themes Admin Plugin.
 | [admin](https://github.com/flextype-plugins/icon) | >=1.0.0 | [download](https://github.com/flextype-plugins/admin/releases) |
 | [form](https://github.com/flextype-plugins/form) | >=1.0.0 | [download](https://github.com/flextype-plugins/form/releases) |
 | [site](https://github.com/flextype-plugins/site) | >=1.0.0 | [download](https://github.com/flextype-plugins/site/releases) |
+| [acl](https://github.com/flextype-plugins/site) | >=1.0.0 | [download](https://github.com/flextype-plugins/acl/releases) |
 
 ## INSTALLATION
 

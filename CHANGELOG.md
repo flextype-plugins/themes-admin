@@ -1,5 +1,12 @@
+<a name="1.0.6"></a>
+# [1.0.6](https://github.com/flextype-plugins/themes-admin/compare/v1.0.5...v1.0.6) (2020-06-23)
+
+### Refactor
+
+* **refactor(core)** update code base for new ACL
+
 <a name="1.0.5"></a>
-# [1.0.5](https://github.com/flextype-plugins/form-admin/compare/v1.0.4...v1.0.5) (2020-06-21)
+# [1.0.5](https://github.com/flextype-plugins/themes-admin/compare/v1.0.4...v1.0.5) (2020-06-21)
 
 ### Features
 
