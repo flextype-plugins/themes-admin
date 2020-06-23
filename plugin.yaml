@@ -1,5 +1,5 @@
 name: Themes Admin
-version: 1.0.5
+version: 1.0.6
 description: Themes Admin plugin to manage site themes for the website frontend.
 icon: fas fa-paint-brush
 author:
@@ -16,3 +16,4 @@ dependencies:
   admin: '>=1.0.0'
   form: '>=1.0.0'
   site: '>=1.0.0'
+  acl: '>=1.0.0'
