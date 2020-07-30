@@ -9,7 +9,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Flextype;
+namespace Flextype\Plugin\ThemesAdmin;
+
+use Flextype\Plugin\ThemesAdmin\Controllers\ThemesController;
+use Flextype\Plugin\ThemesAdmin\Models\Themes;
 
 use Slim\Flash\Messages;
 use Slim\Http\Environment;

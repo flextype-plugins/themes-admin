@@ -7,7 +7,7 @@ declare(strict_types=1);
  * Founded by Sergey Romanenko and maintained by Flextype Community.
  */
 
-namespace Flextype;
+namespace Flextype\Plugin\ThemesAdmin\Models;
 
 use Flextype\Component\Filesystem\Filesystem;
 use RuntimeException;
@@ -91,7 +91,7 @@ class Themes
                 if (trim($default_theme_settings_file_content) === '') {
                     $default_theme_settings = [];
                 } else {
-                    $default_theme_settings = $this->flextype['serializer']->decode($default_theme_settings_file_content, 'yaml');
+                    $default_theme_settings = $this->flextype['yaml']->decode($default_theme_settings_file_content);
                 }
 
                 // Create custom theme settings file
@@ -102,7 +102,7 @@ class Themes
                 if (trim($custom_theme_settings_file_content) === '') {
                     $custom_theme_settings = [];
                 } else {
-                    $custom_theme_settings = $this->flextype['serializer']->decode($custom_theme_settings_file_content, 'yaml');
+                    $custom_theme_settings = $this->flextype['yaml']->decode($custom_theme_settings_file_content);
                 }
 
                 // Check if default theme manifest file exists
@@ -112,7 +112,7 @@ class Themes
 
                 // Get default theme manifest content
                 $default_theme_manifest_file_content = Filesystem::read($default_theme_manifest_file);
-                $default_theme_manifest              = $this->flextype['serializer']->decode($default_theme_manifest_file_content, 'yaml');
+                $default_theme_manifest              = $this->flextype['yaml']->decode($default_theme_manifest_file_content);
 
                 // Merge theme settings and manifest data
                 $themes[$theme['dirname']]['manifest'] = $default_theme_manifest;
