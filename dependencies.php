@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Flextype\Plugin\ThemesAdmin;
 
 use Flextype\Plugin\ThemesAdmin\Controllers\ThemesController;
+use Flextype\Plugin\ThemesAdmin\Controllers\TemplatesController;
 use Flextype\Plugin\ThemesAdmin\Models\Themes;
 
 use Slim\Flash\Messages;

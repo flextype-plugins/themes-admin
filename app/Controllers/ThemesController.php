@@ -69,14 +69,14 @@ class ThemesController extends Container
         $post_data = $request->getParsedBody();
 
         $custom_settings_file = PATH['project'] . '/config/plugins/site/settings.yaml';
-        $custom_settings_file_data = $this->serializer->decode(Filesystem::read($custom_settings_file), 'yaml');
+        $custom_settings_file_data = $this->yaml->decode(Filesystem::read($custom_settings_file));
 
         Arrays::set($custom_settings_file_data, 'theme', $post_data['theme-id']);
 
-        Filesystem::write($custom_settings_file, $this->serializer->encode($custom_settings_file_data, 'yaml'));
+        Filesystem::write($custom_settings_file, $this->yaml->encode($custom_settings_file_data));
 
         // clear cache
-        $this->cache->clear('doctrine');
+        $this->cache->purge('doctrine');
 
         // Redirect to themes index page
         return $response->withRedirect($this->router->pathFor('admin.themes.index'));
@@ -105,7 +105,7 @@ class ThemesController extends Container
             [
                 'menu_item' => 'themes',
                 'id' => $id,
-                'theme_manifest' => $this->serializer->decode($custom_theme_manifest_file_content, 'yaml'),
+                'theme_manifest' => $this->yaml->decode($custom_theme_manifest_file_content),
                 'links' =>  [
                     'themes' => [
                         'link' => $this->router->pathFor('admin.themes.index'),
