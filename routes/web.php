@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Flextype;
+use Flextype\Plugin\Acl\Middlewares\AclIsUserLoggedInMiddleware;
+use Flextype\Plugin\Acl\Middlewares\AclIsUserLoggedInRolesInMiddleware;
 
 $app->group('/' . $admin_route, function () use ($app, $flextype) : void {
 
