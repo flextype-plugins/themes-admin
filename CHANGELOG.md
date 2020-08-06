@@ -1,3 +1,10 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/flextype-plugins/themes-admin/compare/v1.1.0...v1.2.0) (2020-08-06)
+
+### Refactor
+
+* **core** moving Themes functionality to Site Plugin
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/flextype-plugins/themes-admin/compare/v1.0.6...v1.1.0) (2020-08-05)
 
