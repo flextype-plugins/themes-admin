@@ -15,16 +15,21 @@ use function Flextype\Component\I18n\__;
 use function is_array;
 use function trim;
 
-use Flextype\App\Foundation\Container;
-
-/**
- * @property twig $twig
- * @property Router $router
- * @property Cache $cache
- * @property Themes $themes
- */
-class ThemesController extends Container
+class ThemesController
 {
+    /**
+     * Flextype Application
+     */
+     protected $flextype;
+
+    /**
+     * __construct
+     */
+     public function __construct($flextype)
+     {
+         $this->flextype = $flextype;
+     }
+
     /**
      * Index page
      *
@@ -33,15 +38,15 @@ class ThemesController extends Container
      */
     public function index(/** @scrutinizer ignore-unused */ Request $request, Response $response) : Response
     {
-        return $this->twig->render(
+        return $this->flextype->container('twig')->render(
             $response,
             'plugins/themes-admin/templates/extends/themes/index.html',
             [
                 'menu_item' => 'themes',
-                'themes_list' => $this->registry->get('themes'),
+                'themes_list' => $this->flextype->container('registry')->get('themes'),
                 'links' =>  [
                     'themes' => [
-                        'link' => $this->router->pathFor('admin.themes.index'),
+                        'link' => $this->flextype->container('router')->pathFor('admin.themes.index'),
                         'title' => __('themes_admin_themes'),
                         'active' => true
                     ],
@@ -69,17 +74,17 @@ class ThemesController extends Container
         $post_data = $request->getParsedBody();
 
         $custom_settings_file = PATH['project'] . '/config/plugins/site/settings.yaml';
-        $custom_settings_file_data = $this->yaml->decode(Filesystem::read($custom_settings_file));
+        $custom_settings_file_data = $this->flextype->container('yaml')->decode(Filesystem::read($custom_settings_file));
 
         Arrays::set($custom_settings_file_data, 'theme', $post_data['theme-id']);
 
-        Filesystem::write($custom_settings_file, $this->yaml->encode($custom_settings_file_data));
+        Filesystem::write($custom_settings_file, $this->flextype->container('yaml')->encode($custom_settings_file_data));
 
         // clear cache
-        $this->cache->purge('doctrine');
+        $this->flextype->container('cache')->purge('doctrine');
 
         // Redirect to themes index page
-        return $response->withRedirect($this->router->pathFor('admin.themes.index'));
+        return $response->withRedirect($this->flextype->container('router')->pathFor('admin.themes.index'));
     }
 
     /**
@@ -99,20 +104,20 @@ class ThemesController extends Container
         // Get theme custom manifest content
         $custom_theme_manifest_file_content = Filesystem::read($custom_theme_manifest_file);
 
-        return $this->twig->render(
+        return $this->flextype->container('twig')->render(
             $response,
             'plugins/themes-admin/templates/extends/themes/information.html',
             [
                 'menu_item' => 'themes',
                 'id' => $id,
-                'theme_manifest' => $this->yaml->decode($custom_theme_manifest_file_content),
+                'theme_manifest' => $this->flextype->container('yaml')->decode($custom_theme_manifest_file_content),
                 'links' =>  [
                     'themes' => [
-                        'link' => $this->router->pathFor('admin.themes.index'),
+                        'link' => $this->flextype->container('router')->pathFor('admin.themes.index'),
                         'title' => __('themes_admin_themes'),
                     ],
                     'themes_information' => [
-                        'link' => $this->router->pathFor('admin.themes.information') . '?id=' . $request->getQueryParams()['id'],
+                        'link' => $this->flextype->container('router')->pathFor('admin.themes.information') . '?id=' . $request->getQueryParams()['id'],
                         'title' => __('admin_information'),
                         'active' => true
                     ],
@@ -138,7 +143,7 @@ class ThemesController extends Container
         // Get theme settings content
         $custom_theme_settings_file_content = Filesystem::read($custom_theme_settings_file);
 
-        return $this->twig->render(
+        return $this->flextype->container('twig')->render(
             $response,
             'plugins/themes-admin/templates/extends/themes/settings.html',
             [
@@ -147,11 +152,11 @@ class ThemesController extends Container
                 'theme_settings' => $custom_theme_settings_file_content,
                 'links' =>  [
                     'themes' => [
-                        'link' => $this->router->pathFor('admin.themes.index'),
+                        'link' => $this->flextype->container('router')->pathFor('admin.themes.index'),
                         'title' => __('themes_admin_themes'),
                     ],
                     'themes_settings' => [
-                        'link' => $this->router->pathFor('admin.themes.settings') . '?id=' . $request->getQueryParams()['id'],
+                        'link' => $this->flextype->container('router')->pathFor('admin.themes.settings') . '?id=' . $request->getQueryParams()['id'],
                         'title' => __('admin_settings'),
                         'active' => true
                     ],
@@ -183,11 +188,11 @@ class ThemesController extends Container
         $custom_theme_settings_file = PATH['project'] . '/config/themes/' . $id . '/settings.yaml';
 
         if (Filesystem::write($custom_theme_settings_file, $data)) {
-            $this->flash->addMessage('success', __('themes_admin_message_theme_settings_saved'));
+            $this->flextype->container('flash')->addMessage('success', __('themes_admin_message_theme_settings_saved'));
         } else {
-            $this->flash->addMessage('error', __('themes_admin_message_theme_settings_not_saved'));
+            $this->flextype->container('flash')->addMessage('error', __('themes_admin_message_theme_settings_not_saved'));
         }
 
-        return $response->withRedirect($this->router->pathFor('admin.themes.settings') . '?id=' . $id);
+        return $response->withRedirect($this->flextype->container('router')->pathFor('admin.themes.settings') . '?id=' . $id);
     }
 }
