@@ -21,26 +21,26 @@ use Flextype\Component\I18n\I18n;
 use function Flextype\Component\I18n\__;
 
 // Add Admin Navigation
-$flextype->container('registry')->set('plugins.admin.settings.navigation.extends.themes', ['title' => __('themes_admin_themes'),'icon' => 'fas fa-palette', 'link' => $flextype->container('router')->pathFor('admin.themes.index')]);
+flextype('registry')->set('plugins.admin.settings.navigation.extends.themes', ['title' => __('themes_admin_themes'),'icon' => 'fas fa-palette', 'link' => flextype('router')->pathFor('admin.themes.index')]);
 
 // Add ThemesController
-$flextype->container()['ThemesController'] = static function () use ($flextype) {
-    return new ThemesController($flextype);
+flextype()->container()['ThemesController'] = static function () {
+    return new ThemesController();
 };
 
 // Add TemplatesController
-$flextype->container()['TemplatesController'] = static function () use ($flextype) {
-    return new TemplatesController($flextype);
+flextype()->container()['TemplatesController'] = static function () {
+    return new TemplatesController();
 };
 
-$_flextype_menu = ($flextype->container('registry')->has('plugins.admin.settings.flextype_menu')) ? $flextype->container('registry')->get('plugins.admin.settings.flextype_menu') : [];
+$_flextype_menu = (flextype('registry')->has('plugins.admin.settings.flextype_menu')) ? flextype('registry')->get('plugins.admin.settings.flextype_menu') : [];
 
-if ($flextype->container('registry')->has('flextype.settings.url') && $flextype->container('registry')->get('flextype.settings.url') != '') {
-    $site_url = $flextype->container('registry')->get('flextype.settings.url');
+if (flextype('registry')->has('flextype.settings.url') && flextype('registry')->get('flextype.settings.url') != '') {
+    $site_url = flextype('registry')->get('flextype.settings.url');
 } else {
     $site_url = Uri::createFromEnvironment(new Environment($_SERVER))->getBaseUrl();
 }
 
-$flextype->container('registry')->set('plugins.admin.settings.flextype_menu',
+flextype('registry')->set('plugins.admin.settings.flextype_menu',
                        array_merge($_flextype_menu,
                         [0 => ['link' => ['url' => $site_url, 'title' => __('themes_admin_view_site'), 'is_external' => true, 'icon' => 'fas fa-globe']]]));
