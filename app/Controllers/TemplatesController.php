@@ -13,18 +13,13 @@ use function Flextype\Component\I18n\__;
 class TemplatesController
 {
     /**
-     * Flextype Application
-     */
-     protected $flextype;
-
-    /**
      * __construct
      */
-     public function __construct($flextype)
+     public function __construct()
      {
-         $this->flextype = $flextype;
+
      }
-     
+
     /**
      * Index page
      *
@@ -36,29 +31,29 @@ class TemplatesController
         // Get theme from request query params
         $theme = $request->getQueryParams()['theme'];
 
-        return $this->flextype->container('twig')->render(
+        return flextype('twig')->render(
             $response,
             'plugins/themes-admin/templates/extends/themes/templates/index.html',
             [
                 'menu_item' => 'themes',
                 'theme' => $theme,
-                'templates_list' => $this->flextype->container('themes')->getTemplates($theme),
-                'partials_list' => $this->flextype->container('themes')->getPartials($theme),
+                'templates_list' => flextype('themes')->getTemplates($theme),
+                'partials_list' => flextype('themes')->getPartials($theme),
                 'links' =>  [
                     'themes' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.themes.index'),
+                        'link' => flextype('router')->pathFor('admin.themes.index'),
                         'title' => __('themes_admin_themes'),
 
                     ],
                     'templates' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.templates.index') . '?theme=' . $theme,
+                        'link' => flextype('router')->pathFor('admin.templates.index') . '?theme=' . $theme,
                         'title' => __('themes_admin_templates'),
                         'active' => true
                     ],
                 ],
                 'buttons' => [
                     'templates_create' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.templates.add') . '?theme=' . $theme,
+                        'link' => flextype('router')->pathFor('admin.templates.add') . '?theme=' . $theme,
                         'title' => __('themes_admin_create_new_template'),
 
                     ],
@@ -78,7 +73,7 @@ class TemplatesController
         // Get theme from request query params
         $theme = $request->getQueryParams()['theme'];
 
-        return $this->flextype->container('twig')->render(
+        return flextype('twig')->render(
             $response,
             'plugins/themes-admin/templates/extends/themes/templates/add.html',
             [
@@ -86,17 +81,17 @@ class TemplatesController
                 'theme' => $theme,
                 'links' =>  [
                     'themes' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.themes.index'),
+                        'link' => flextype('router')->pathFor('admin.themes.index'),
                         'title' => __('themes_admin_themes'),
 
                     ],
                     'templates' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.templates.index') . '?theme=' . $theme,
+                        'link' => flextype('router')->pathFor('admin.templates.index') . '?theme=' . $theme,
                         'title' => __('themes_admin_templates'),
 
                     ],
                     'templates_add' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.templates.add') . '?theme=' . $theme,
+                        'link' => flextype('router')->pathFor('admin.templates.add') . '?theme=' . $theme,
                         'title' => __('themes_admin_create_new_template'),
                         'active' => true
                     ],
@@ -120,26 +115,26 @@ class TemplatesController
         $type  = $post_data['type'];
         $theme = $post_data['theme'];
 
-        $file = PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $this->flextype->container('slugify')->slugify($id) . '.html';
+        $file = PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . flextype('slugify')->slugify($id) . '.html';
 
         if (! Filesystem::has($file)) {
             if (Filesystem::write(
                 $file,
                 ''
             )) {
-                $this->flextype->container('flash')->addMessage('success', __('themes_admin_message_' . $type . '_created'));
+                flextype('flash')->addMessage('success', __('themes_admin_message_' . $type . '_created'));
             } else {
-                $this->flextype->container('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_created'));
+                flextype('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_created'));
             }
         } else {
-            $this->flextype->container('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_created'));
+            flextype('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_created'));
         }
 
         if (isset($post_data['create-and-edit'])) {
-            return $response->withRedirect($this->flextype->container('router')->pathFor('admin.templates.edit') . '?theme=' . $theme . '&type=' . $type . '&id=' . $id);
+            return $response->withRedirect(flextype('router')->pathFor('admin.templates.edit') . '?theme=' . $theme . '&type=' . $type . '&id=' . $id);
         }
 
-        return $response->withRedirect($this->flextype->container('router')->pathFor('admin.templates.index') . '?theme=' . $theme);
+        return $response->withRedirect(flextype('router')->pathFor('admin.templates.index') . '?theme=' . $theme);
     }
 
     /**
@@ -154,7 +149,7 @@ class TemplatesController
         $type  = $request->getQueryParams()['type'];
         $theme = $request->getQueryParams()['theme'];
 
-        return $this->flextype->container('twig')->render(
+        return flextype('twig')->render(
             $response,
             'plugins/themes-admin/templates/extends/themes/templates/edit.html',
             [
@@ -165,17 +160,17 @@ class TemplatesController
                 'type' => ($request->getQueryParams()['type'] && $request->getQueryParams()['type'] === 'partial' ? 'partial' : 'template'),
                 'links' => [
                     'themes' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.themes.index'),
+                        'link' => flextype('router')->pathFor('admin.themes.index'),
                         'title' => __('themes_admin_themes'),
 
                     ],
                     'templates' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.templates.index') . '?theme=' . $theme,
+                        'link' => flextype('router')->pathFor('admin.templates.index') . '?theme=' . $theme,
                         'title' => __('themes_admin_templates'),
 
                     ],
                     'templates_editor' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.templates.edit') . '?id=' . $request->getQueryParams()['id'] . '&type=' . ($request->getQueryParams()['type'] && $request->getQueryParams()['type'] === 'partial' ? 'partial' : 'template') . '&theme=' . $theme,
+                        'link' => flextype('router')->pathFor('admin.templates.edit') . '?id=' . $request->getQueryParams()['id'] . '&type=' . ($request->getQueryParams()['type'] && $request->getQueryParams()['type'] === 'partial' ? 'partial' : 'template') . '&theme=' . $theme,
                         'title' => __('admin_editor'),
                         'active' => true
                     ],
@@ -205,12 +200,12 @@ class TemplatesController
         $type  = $request->getParsedBody()['type'];
 
         if (Filesystem::write(PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html', $request->getParsedBody()['data'])) {
-            $this->flextype->container('flash')->addMessage('success', __('themes_admin_message_' . $type . '_saved'));
+            flextype('flash')->addMessage('success', __('themes_admin_message_' . $type . '_saved'));
         } else {
-            $this->flextype->container('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_saved'));
+            flextype('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_saved'));
         }
 
-        return $response->withRedirect($this->flextype->container('router')->pathFor('admin.templates.edit') . '?id=' . $id . '&type=' . $type . '&theme=' . $theme);
+        return $response->withRedirect(flextype('router')->pathFor('admin.templates.edit') . '?id=' . $id . '&type=' . $type . '&theme=' . $theme);
     }
 
     /**
@@ -224,7 +219,7 @@ class TemplatesController
         // Get theme from request query params
         $theme = $request->getQueryParams()['theme'];
 
-        return $this->flextype->container('twig')->render(
+        return flextype('twig')->render(
             $response,
             'plugins/themes-admin/templates/extends/themes/templates/rename.html',
             [
@@ -235,17 +230,17 @@ class TemplatesController
                 'type_current' => ($request->getQueryParams()['type'] && $request->getQueryParams()['type'] === 'partial' ? 'partial' : 'template'),
                 'links' => [
                     'themes' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.themes.index'),
+                        'link' => flextype('router')->pathFor('admin.themes.index'),
                         'title' => __('themes_admin_themes'),
 
                     ],
                     'templates' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.templates.index') . '?theme=' . $theme,
+                        'link' => flextype('router')->pathFor('admin.templates.index') . '?theme=' . $theme,
                         'title' => __('themes_admin_templates'),
 
                     ],
                     'templates_rename' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.templates.rename') . '?id=' . $request->getQueryParams()['id'] . '&type=' . ($request->getQueryParams()['type'] && $request->getQueryParams()['type'] === 'partial' ? 'partial' : 'template') . '&theme=' . $theme,
+                        'link' => flextype('router')->pathFor('admin.templates.rename') . '?id=' . $request->getQueryParams()['id'] . '&type=' . ($request->getQueryParams()['type'] && $request->getQueryParams()['type'] === 'partial' ? 'partial' : 'template') . '&theme=' . $theme,
                         'title' => __('admin_rename'),
                         'active' => true
                     ],
@@ -266,21 +261,21 @@ class TemplatesController
         $theme = $request->getParsedBody()['theme'];
         $type  = $request->getParsedBody()['type_current'];
 
-        if (! Filesystem::has(PATH['project'] . '/themes/' . $this->flextype->container('registry')->get('plugins.site.settings.theme') . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html')) {
+        if (! Filesystem::has(PATH['project'] . '/themes/' . flextype('registry')->get('plugins.site.settings.theme') . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html')) {
             if (Filesystem::rename(
                 PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id_current'] . '.html',
                 PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()['id'] . '.html'
             )
             ) {
-                $this->flextype->container('flash')->addMessage('success', __('themes_admin_message_' . $type . '_renamed'));
+                flextype('flash')->addMessage('success', __('themes_admin_message_' . $type . '_renamed'));
             } else {
-                $this->flextype->container('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_renamed'));
+                flextype('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_renamed'));
             }
         } else {
-            $this->flextype->container('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_renamed'));
+            flextype('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_renamed'));
         }
 
-        return $response->withRedirect($this->flextype->container('router')->pathFor('admin.templates.index') . '?theme=' . $theme);
+        return $response->withRedirect(flextype('router')->pathFor('admin.templates.index') . '?theme=' . $theme);
     }
 
     /**
@@ -298,12 +293,12 @@ class TemplatesController
         $file_path = PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()[$type . '-id'] . '.html';
 
         if (Filesystem::delete($file_path)) {
-            $this->flextype->container('flash')->addMessage('success', __('themes_admin_message_' . $type . '_deleted'));
+            flextype('flash')->addMessage('success', __('themes_admin_message_' . $type . '_deleted'));
         } else {
-            $this->flextype->container('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_deleted'));
+            flextype('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_deleted'));
         }
 
-        return $response->withRedirect($this->flextype->container('router')->pathFor('admin.templates.index') . '?theme=' . $theme);
+        return $response->withRedirect(flextype('router')->pathFor('admin.templates.index') . '?theme=' . $theme);
     }
 
     /**
@@ -322,12 +317,12 @@ class TemplatesController
         $file_path_new = PATH['project'] . '/themes/' . $theme . '/' . $this->_type_location($type) . $request->getParsedBody()[$type . '-id'] . '-duplicate-' . date('Ymd_His') . '.html';
 
         if (Filesystem::copy($file_path, $file_path_new)) {
-            $this->flextype->container('flash')->addMessage('success', __('themes_admin_message_' . $type . '_duplicated'));
+            flextype('flash')->addMessage('success', __('themes_admin_message_' . $type . '_duplicated'));
         } else {
-            $this->flextype->container('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_duplicated'));
+            flextype('flash')->addMessage('error', __('themes_admin_message_' . $type . '_was_not_duplicated'));
         }
 
-        return $response->withRedirect($this->flextype->container('router')->pathFor('admin.templates.index') . '?theme=' . $theme);
+        return $response->withRedirect(flextype('router')->pathFor('admin.templates.index') . '?theme=' . $theme);
     }
 
     private function _type_location($type)

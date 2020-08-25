@@ -18,16 +18,11 @@ use function trim;
 class ThemesController
 {
     /**
-     * Flextype Application
-     */
-     protected $flextype;
-
-    /**
      * __construct
      */
-     public function __construct($flextype)
+     public function __construct()
      {
-         $this->flextype = $flextype;
+
      }
 
     /**
@@ -38,15 +33,15 @@ class ThemesController
      */
     public function index(/** @scrutinizer ignore-unused */ Request $request, Response $response) : Response
     {
-        return $this->flextype->container('twig')->render(
+        return flextype('twig')->render(
             $response,
             'plugins/themes-admin/templates/extends/themes/index.html',
             [
                 'menu_item' => 'themes',
-                'themes_list' => $this->flextype->container('registry')->get('themes'),
+                'themes_list' => flextype('registry')->get('themes'),
                 'links' =>  [
                     'themes' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.themes.index'),
+                        'link' => flextype('router')->pathFor('admin.themes.index'),
                         'title' => __('themes_admin_themes'),
                         'active' => true
                     ],
@@ -74,17 +69,17 @@ class ThemesController
         $post_data = $request->getParsedBody();
 
         $custom_settings_file = PATH['project'] . '/config/plugins/site/settings.yaml';
-        $custom_settings_file_data = $this->flextype->container('yaml')->decode(Filesystem::read($custom_settings_file));
+        $custom_settings_file_data = flextype('yaml')->decode(Filesystem::read($custom_settings_file));
 
         Arrays::set($custom_settings_file_data, 'theme', $post_data['theme-id']);
 
-        Filesystem::write($custom_settings_file, $this->flextype->container('yaml')->encode($custom_settings_file_data));
+        Filesystem::write($custom_settings_file, flextype('yaml')->encode($custom_settings_file_data));
 
         // clear cache
-        $this->flextype->container('cache')->purge('doctrine');
+        flextype('cache')->purge('doctrine');
 
         // Redirect to themes index page
-        return $response->withRedirect($this->flextype->container('router')->pathFor('admin.themes.index'));
+        return $response->withRedirect(flextype('router')->pathFor('admin.themes.index'));
     }
 
     /**
@@ -104,20 +99,20 @@ class ThemesController
         // Get theme custom manifest content
         $custom_theme_manifest_file_content = Filesystem::read($custom_theme_manifest_file);
 
-        return $this->flextype->container('twig')->render(
+        return flextype('twig')->render(
             $response,
             'plugins/themes-admin/templates/extends/themes/information.html',
             [
                 'menu_item' => 'themes',
                 'id' => $id,
-                'theme_manifest' => $this->flextype->container('yaml')->decode($custom_theme_manifest_file_content),
+                'theme_manifest' => flextype('yaml')->decode($custom_theme_manifest_file_content),
                 'links' =>  [
                     'themes' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.themes.index'),
+                        'link' => flextype('router')->pathFor('admin.themes.index'),
                         'title' => __('themes_admin_themes'),
                     ],
                     'themes_information' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.themes.information') . '?id=' . $request->getQueryParams()['id'],
+                        'link' => flextype('router')->pathFor('admin.themes.information') . '?id=' . $request->getQueryParams()['id'],
                         'title' => __('admin_information'),
                         'active' => true
                     ],
@@ -143,7 +138,7 @@ class ThemesController
         // Get theme settings content
         $custom_theme_settings_file_content = Filesystem::read($custom_theme_settings_file);
 
-        return $this->flextype->container('twig')->render(
+        return flextype('twig')->render(
             $response,
             'plugins/themes-admin/templates/extends/themes/settings.html',
             [
@@ -152,11 +147,11 @@ class ThemesController
                 'theme_settings' => $custom_theme_settings_file_content,
                 'links' =>  [
                     'themes' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.themes.index'),
+                        'link' => flextype('router')->pathFor('admin.themes.index'),
                         'title' => __('themes_admin_themes'),
                     ],
                     'themes_settings' => [
-                        'link' => $this->flextype->container('router')->pathFor('admin.themes.settings') . '?id=' . $request->getQueryParams()['id'],
+                        'link' => flextype('router')->pathFor('admin.themes.settings') . '?id=' . $request->getQueryParams()['id'],
                         'title' => __('admin_settings'),
                         'active' => true
                     ],
@@ -188,11 +183,11 @@ class ThemesController
         $custom_theme_settings_file = PATH['project'] . '/config/themes/' . $id . '/settings.yaml';
 
         if (Filesystem::write($custom_theme_settings_file, $data)) {
-            $this->flextype->container('flash')->addMessage('success', __('themes_admin_message_theme_settings_saved'));
+            flextype('flash')->addMessage('success', __('themes_admin_message_theme_settings_saved'));
         } else {
-            $this->flextype->container('flash')->addMessage('error', __('themes_admin_message_theme_settings_not_saved'));
+            flextype('flash')->addMessage('error', __('themes_admin_message_theme_settings_not_saved'));
         }
 
-        return $response->withRedirect($this->flextype->container('router')->pathFor('admin.themes.settings') . '?id=' . $id);
+        return $response->withRedirect(flextype('router')->pathFor('admin.themes.settings') . '?id=' . $id);
     }
 }
