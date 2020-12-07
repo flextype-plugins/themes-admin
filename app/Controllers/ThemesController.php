@@ -76,7 +76,7 @@ class ThemesController
         Filesystem::write($custom_settings_file, flextype('yaml')->encode($custom_settings_file_data));
 
         // clear cache
-        flextype('cache')->purge('doctrine');
+        Filesystem::deleteDir(PATH['tmp'] . '/data');
 
         // Redirect to themes index page
         return $response->withRedirect(flextype('router')->pathFor('admin.themes.index'));
