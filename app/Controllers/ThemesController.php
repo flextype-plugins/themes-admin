@@ -69,11 +69,11 @@ class ThemesController
         $post_data = $request->getParsedBody();
 
         $custom_settings_file = PATH['project'] . '/config/plugins/site/settings.yaml';
-        $custom_settings_file_data = flextype('yaml')->decode(Filesystem::read($custom_settings_file));
+        $custom_settings_file_data = flextype('serializers')->yaml()->decode(Filesystem::read($custom_settings_file));
 
         Arrays::set($custom_settings_file_data, 'theme', $post_data['theme-id']);
 
-        Filesystem::write($custom_settings_file, flextype('yaml')->encode($custom_settings_file_data));
+        Filesystem::write($custom_settings_file, flextype('serializers')->yaml()->encode($custom_settings_file_data));
 
         // clear cache
         Filesystem::deleteDir(PATH['tmp'] . '/data');
@@ -105,7 +105,7 @@ class ThemesController
             [
                 'menu_item' => 'themes',
                 'id' => $id,
-                'theme_manifest' => flextype('yaml')->decode($custom_theme_manifest_file_content),
+                'theme_manifest' => flextype('serializers')->yaml()->decode($custom_theme_manifest_file_content),
                 'links' =>  [
                     'themes' => [
                         'link' => flextype('router')->pathFor('admin.themes.index'),
