@@ -2,12 +2,12 @@
 
 {% block admin_navigation_top_secondary %}
     {% if is_current_path('admin.themes.index') or
-    is_current_path('admin.templates.index') or
-    is_current_path('admin.templates.edit') or
-    is_current_path('admin.templates.rename') or
-    is_current_path('admin.templates.add') %}
+    is_current_path('admin.themes.templates.index') or
+    is_current_path('admin.themes.templates.edit') or
+    is_current_path('admin.themes.templates.rename') or
+    is_current_path('admin.themes.templates.add') %}
         /
-        <a href="{{ path_for('admin.templates.index') }}?theme={{ theme }}">
+        <a href="{{ path_for('admin.themes.templates.index') }}?theme={{ theme }}">
             <span class="pr-1 pl-1">{{ theme }}</span></a>
         {% if id %}
             /

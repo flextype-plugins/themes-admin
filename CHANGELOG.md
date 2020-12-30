@@ -1,3 +1,12 @@
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/flextype-plugins/themes-admin/compare/v1.6.0...v1.7.0) (2020-12-30)
+
+### Features
+
+* **core** update code base for new Flextype 0.9.14
+* **core** Moving to PHP 7.4
+* **core** use new TWIG Plugin 1.7.0
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/flextype-plugins/themes-admin/compare/v1.5.0...v1.6.0) (2020-12-20)
 
