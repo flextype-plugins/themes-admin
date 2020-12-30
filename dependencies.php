@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace Flextype\Plugin\ThemesAdmin;
 
-use Flextype\Plugin\ThemesAdmin\Controllers\ThemesController;
-use Flextype\Plugin\ThemesAdmin\Controllers\TemplatesController;
+use Flextype\Plugin\ThemesAdmin\Controllers\ThemesAdminController;
+use Flextype\Plugin\ThemesAdmin\Controllers\ThemesAdminTemplatesController;
 
 use Slim\Flash\Messages;
 use Slim\Http\Environment;
@@ -23,15 +23,11 @@ use function Flextype\Component\I18n\__;
 // Add Admin Navigation
 flextype('registry')->set('plugins.admin.settings.navigation.extends.themes', ['title' => __('themes_admin_themes'),'icon' => 'fas fa-palette', 'link' => flextype('router')->pathFor('admin.themes.index')]);
 
-// Add ThemesController
-flextype()->container()['ThemesController'] = static function () {
-    return new ThemesController();
-};
+// Add ThemesAdminController
+flextype()->container()['ThemesAdminController'] = fn() => new ThemesAdminController();
 
-// Add TemplatesController
-flextype()->container()['TemplatesController'] = static function () {
-    return new TemplatesController();
-};
+// Add ThemesAdminTemplatesController
+flextype()->container()['ThemesAdminTemplatesController'] = fn() => new ThemesAdminTemplatesController();
 
 $_flextype_menu = (flextype('registry')->has('plugins.admin.settings.flextype_menu')) ? flextype('registry')->get('plugins.admin.settings.flextype_menu') : [];
 

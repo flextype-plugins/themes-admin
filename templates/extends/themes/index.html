@@ -24,23 +24,23 @@
             <tbody>
                 {% for key, theme in themes_list %}
                     <tr>
-                        <td class="w-1 text-center {% if key == registry.get('plugins.site.settings.theme') %}{% else %}opacity-50{% endif %}">
+                        <td class="w-1 text-center {% if key == flextype.registry.get('plugins.site.settings.theme') %}{% else %}opacity-50{% endif %}">
                             <i class="icon">{{ icon('fas fa-palette') }}</i>
                         </td>
-                        <td class="pl-0 {% if key == registry.get('plugins.site.settings.theme') %}{% else %}opacity-50{% endif %}">
-                            <a href="{{ path_for('admin.templates.index') }}?theme={{ key }}">{{ theme.manifest.name }}</a>
+                        <td class="pl-0 {% if key == flextype.registry.get('plugins.site.settings.theme') %}{% else %}opacity-50{% endif %}">
+                            <a href="{{ path_for('admin.themes.templates.index') }}?theme={{ key }}">{{ theme.manifest.name }}</a>
                         </td>
-                        <td class="{% if key == registry.get('plugins.site.settings.theme') %}{% else %}opacity-50{% endif %}">{{ theme.manifest.description }}</td>
-                        <td class="{% if key == registry.get('plugins.site.settings.theme') %}{% else %}opacity-50{% endif %}">
+                        <td class="{% if key == flextype.registry.get('plugins.site.settings.theme') %}{% else %}opacity-50{% endif %}">{{ theme.manifest.description }}</td>
+                        <td class="{% if key == flextype.registry.get('plugins.site.settings.theme') %}{% else %}opacity-50{% endif %}">
                             <a href="{{ theme.author.url }}" target="_blank">{{ theme.manifest.author.name }}</a>
                         </td>
-                        <td class="{% if key == registry.get('plugins.site.settings.theme') %}{% else %}opacity-50{% endif %}">{{ theme.manifest.version }}</td>
+                        <td class="{% if key == flextype.registry.get('plugins.site.settings.theme') %}{% else %}opacity-50{% endif %}">{{ theme.manifest.version }}</td>
                         <td class="text-right">
                             <button type="button" class="js-dropdown-btn" data-dropdown="dropdown-{{ key }}">
                                 <i class="icon">{{ icon('fas fa-ellipsis-h') }}</i>
                             </button>
                             <div id="dropdown-{{ key }}" class="dropdown">
-                                {% if key == registry.get('plugins.site.settings.theme') %}
+                                {% if key == flextype.registry.get('plugins.site.settings.theme') %}
                                 {% else %}
                                     <a class="dropdown__item" href="javascript:;" onclick="event.preventDefault();
                               document.getElementById('activate-theme-id-{{ key }}').submit();">
