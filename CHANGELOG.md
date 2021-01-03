@@ -1,3 +1,12 @@
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/flextype-plugins/themes-admin/compare/v1.7.0...v1.8.0) (2021-01-03)
+
+### Features
+
+* **core** update code base for new Flextype 0.9.15
+* **routes** improve controllers handling in routes for performance enhancements
+* **core** add plugin.php file
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/flextype-plugins/themes-admin/compare/v1.6.0...v1.7.0) (2020-12-30)
 
