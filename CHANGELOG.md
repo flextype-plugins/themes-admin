@@ -1,3 +1,11 @@
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/flextype-plugins/themes-admin/compare/v1.8.0...v1.9.0) (2021-01-07)
+
+### Features
+
+* **core** Update code base for new Icon 2.0.0
+* **core** update code base for new Twig 2.0.0
+
 <a name="1.8.0"></a>
 # [1.8.0](https://github.com/flextype-plugins/themes-admin/compare/v1.7.0...v1.8.0) (2021-01-03)
 
