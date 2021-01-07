@@ -18,7 +18,7 @@ use Flextype\Component\I18n\I18n;
 use function Flextype\Component\I18n\__;
 
 // Add Admin Navigation
-flextype('registry')->set('plugins.admin.settings.navigation.extends.themes', ['title' => __('themes_admin_themes'),'icon' => 'fas fa-palette', 'link' => flextype('router')->pathFor('admin.themes.index')]);
+flextype('registry')->set('plugins.admin.settings.navigation.extends.themes', ['title' => __('themes_admin_themes'), 'icon' => ['name' => 'palette', 'set' => 'fontawesome|solid'], 'link' => flextype('router')->pathFor('admin.themes.index')]);
 
 $_flextype_menu = (flextype('registry')->has('plugins.admin.settings.flextype_menu')) ? flextype('registry')->get('plugins.admin.settings.flextype_menu') : [];
 
@@ -30,4 +30,4 @@ if (flextype('registry')->has('flextype.settings.url') && flextype('registry')->
 
 flextype('registry')->set('plugins.admin.settings.flextype_menu',
                        array_merge($_flextype_menu,
-                        [0 => ['link' => ['url' => $site_url, 'title' => __('themes_admin_view_site'), 'is_external' => true, 'icon' => 'fas fa-globe']]]));
+                        [0 => ['link' => ['url' => $site_url, 'title' => __('themes_admin_view_site'), 'is_external' => true, 'icon' => ['name' => 'globe', 'set' => 'fontawesome|solid'] ]]]));

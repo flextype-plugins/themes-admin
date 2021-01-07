@@ -1,7 +1,9 @@
 name: Themes Admin
-version: 1.8.0
+version: 1.9.0
 description: Themes Admin plugin to manage site themes for the website frontend.
-icon: fas fa-paint-brush
+icon:
+  name: paint-brush
+  set: "fontawesome|solid"
 author:
   name: Sergey Romanenko
   email: support@flextype.org
@@ -12,7 +14,7 @@ license: MIT
 
 dependencies:
   flextype: 0.9.15
-  twig: '>=1.0.0'
+  twig: '>=2.0.0'
   admin: '>=1.0.0'
   form: '>=1.0.0'
   site: '>=1.0.0'
