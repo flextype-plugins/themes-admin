@@ -1,3 +1,8 @@
+<a name="1.10.1"></a>
+# [1.10.1](https://github.com/flextype-plugins/themes-admin/compare/v1.10.0...v1.10.1) (2021-01-16)
+
+* **templates** fix index template.
+
 <a name="1.10.0"></a>
 # [1.10.0](https://github.com/flextype-plugins/themes-admin/compare/v1.9.0...v1.10.0) (2021-01-14)
 
